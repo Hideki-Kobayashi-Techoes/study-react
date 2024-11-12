@@ -1,7 +1,5 @@
 import localFont from "next/font/local";
 import { Footer } from "@/components/Footer";
-import { Headline } from "@/components/Headline";
-import { Links } from "@/components/Links";
 import { Main } from "@/components/Main";
 
 
