@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import { Footer } from "@/components/Footer";
 import { Main } from "@/components/Main";
 import { Header } from "@/components/Header";
+import { ExternalLinks } from "@/components/ExternalLinks";
 
 
 const geistSans = localFont({
@@ -23,6 +24,7 @@ export default function Home() {
       <Header />
       <Main page="index" />
       <Footer />
+      <ExternalLinks />
     </div>
   );
 }
