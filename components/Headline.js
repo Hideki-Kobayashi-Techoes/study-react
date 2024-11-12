@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "@/styles/Home.module.css"
 
 export function Headline(props) {  
   return (
@@ -11,7 +12,7 @@ export function Headline(props) {
         height={38}
         priority
       />
-      <h1 className="title">{props.page} page</h1>
+      <h1 className={styles.title}>{props.page} page</h1>
       <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
         <li className="mb-2">
           Get started by editing {props.children} .
