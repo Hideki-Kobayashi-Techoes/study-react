@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Main } from "@/components/Main";
 import { Footer } from "@/components/Footer";
 import { ExternalLinks } from "@/components/ExternalLinks";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,6 +19,16 @@ const geistMono = localFont({
 export default function Home() {
   const handleClick = useCallback(() => {
     alert(100)
+  }, [])
+
+  useEffect(() => {
+    console.log("mount")
+    document.body.style.backgroundColor = "lightBlue"
+
+    return () => {
+      console.log("unmount")
+      document.body.style.backgroundColor = ""
+    }
   }, [])
 
   return (
