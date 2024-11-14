@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Main } from "@/components/Main";
 import { Footer } from "@/components/Footer";
 import { ExternalLinks } from "@/components/ExternalLinks";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,19 +18,18 @@ const geistMono = localFont({
 
 export default function Home() {
   const [count, setCount] = useState(1)
-  const handleClick = () => {
-    setCount(count => count + 1)
-  }
+  const handleClick = useCallback(() => {
+    if (count < 10) {
+      setCount(count => count + 1)
+    }
+  }, [count])
 
   useEffect(() => {
-    console.log("mount")
     document.body.style.backgroundColor = "lightBlue"
-
     return () => {
-      console.log("unmount")
       document.body.style.backgroundColor = ""
     }
-  }, [])
+  }, [count])
 
   return (
     <div
