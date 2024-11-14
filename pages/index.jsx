@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Main } from "@/components/Main";
 import { Footer } from "@/components/Footer";
 import { ExternalLinks } from "@/components/ExternalLinks";
-import { useCallback, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,9 +17,10 @@ const geistMono = localFont({
 });
 
 export default function Home() {
-  const handleClick = useCallback(() => {
-    alert(100)
-  }, [])
+  const [count, setCount] = useState(1)
+  const handleClick = () => {
+    setCount(count => count + 1)
+  }
 
   useEffect(() => {
     console.log("mount")
@@ -37,6 +38,7 @@ export default function Home() {
     >
       <Header />
       <Main page="index" />
+      <h1>{count}</h1>
       <button href="/about" onClick={handleClick}>ボタン</button>
       <Footer />
       <ExternalLinks />
