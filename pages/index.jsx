@@ -3,7 +3,9 @@ import { Header } from "@/components/Header";
 import { Main } from "@/components/Main";
 import { Footer } from "@/components/Footer";
 import { ExternalLinks } from "@/components/ExternalLinks";
-import { useCallback, useEffect, useState } from "react";
+import { useCounter } from "@/hooks/useCounter";
+import { useInputArray } from "@/hooks/useInputArray";
+import { useBgLightBlue } from "@/hooks/useBgLightBlue";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,45 +19,9 @@ const geistMono = localFont({
 });
 
 export default function Home() {
-  const [count, setCount] = useState(1)
-  const [text, setText] = useState("")
-  const [isShow, setIsShow] = useState(true)
-  const [array, setArray] = useState([])
-
-  const handleClick = useCallback(() => {
-    if (count < 10) {
-      setCount(prevCount => prevCount + 1)
-    }
-  }, [count])
-
-  const handleChange = useCallback((e) => {
-    if (e.target.value.length > 5) {
-      alert("5文字以内にしてください")
-      return
-    }
-    setText(e.target.value.trim())
-  }, [])
-
-  const handleDisplay = useCallback(() => {
-    setIsShow(prevIsShow => !prevIsShow)
-  }, [])
-
-  const handleAdd = useCallback(() => {
-    setArray(prevArray => {
-      if (prevArray.some(item => item === text)) {
-        alert("同じ要素がすでに存在します")
-        return prevArray
-      }
-      return [...prevArray, text]
-    })
-  }, [text])
-
-  useEffect(() => {
-    document.body.style.backgroundColor = "lightBlue"
-    return () => {
-      document.body.style.backgroundColor = ""
-    }
-  }, [count])
+  const { count, isShow, handleClick, handleDisplay } = useCounter()
+  const { text, array, handleChange, handleAdd } = useInputArray()
+  useBgLightBlue()
 
   return (
     <div
@@ -63,10 +29,10 @@ export default function Home() {
     >
       <Header />
       <Main page="index" />
-      <input type="text" value={text} onChange={handleChange}/>
       {isShow ? <h1>{count}</h1> : null}
       <button onClick={handleClick}>ボタン</button>
       <button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
+      <input type="text" value={text} onChange={handleChange}/>
       <button onClick={handleAdd}>追加</button>
       <ul>
         {array.map(item => {
